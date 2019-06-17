@@ -50,7 +50,10 @@ function update(this: Scene) {
         }
     } else {
         player.anims.play('idle', true);
-        player.setVelocityX(0);
+        
+        if (player.body.touching.down) {
+            player.setVelocityX(0);
+        }
     }
 
     if (cursors.up.isDown && player.body.touching.down) {
