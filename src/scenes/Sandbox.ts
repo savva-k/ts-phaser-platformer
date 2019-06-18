@@ -71,6 +71,7 @@ export class Sandbox extends BaseScene {
     private createPlayer() {
         this.player = this.physics.add.sprite(50, 400, this.playerSpriteName);
         this.player.setBounce(0.1);
+        this.player.setSize(20, 64);
         this.player.setCollideWorldBounds(true);
     }
 
