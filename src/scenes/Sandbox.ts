@@ -13,6 +13,7 @@ export class Sandbox extends BaseScene {
         new Platform(655, 580, 'ground', 2),
         new Platform(780, 580, 'ground', 2),
         new Platform(400, 470, 'ground', 2),
+        new Platform(200, 370, 'ground', 2),
     ];
 
     private player: Phaser.Physics.Arcade.Sprite;
