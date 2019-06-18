@@ -1,15 +1,27 @@
 import { BaseScene } from "./BaseScene";
+import { Platform } from "../model/Platform";
 
 export class Sandbox extends BaseScene {
 
-    private readonly playerSpriteName = 'player';
-    private player;
+    private readonly playerSpriteName: string = 'player';
+    private readonly platforms: Platform[] = [
+        new Platform(30, 580, 'ground', 2),
+        new Platform(155, 580, 'ground', 2),
+        new Platform(280, 580, 'ground', 2),
+        new Platform(405, 580, 'ground', 2),
+        new Platform(530, 580, 'ground', 2),
+        new Platform(655, 580, 'ground', 2),
+        new Platform(780, 580, 'ground', 2),
+        new Platform(400, 470, 'ground', 2),
+    ];
+
+    private player: Phaser.Physics.Arcade.Sprite;
 
     public preload(): void {
         this.load.setBaseURL('/src');
         this.load.image('background', './assets/space_background.jpg');
         this.load.image('ground', './assets/ground.png');
-        this.load.spritesheet('player', 'assets/player.png', { frameWidth: 64, frameHeight: 64 });
+        this.load.spritesheet('player', './assets/player.png', { frameWidth: 64, frameHeight: 64 });
     }
 
     public create(): void {
@@ -46,18 +58,9 @@ export class Sandbox extends BaseScene {
     }
 
     private createStages() {
-        let platforms = this.physics.add.staticGroup();
-        platforms.create(30, 580, 'ground').setScale(2).refreshBody();
-        platforms.create(155, 580, 'ground').setScale(2).refreshBody();
-        platforms.create(280, 580, 'ground').setScale(2).refreshBody();
-        platforms.create(405, 580, 'ground').setScale(2).refreshBody();
-        platforms.create(530, 580, 'ground').setScale(2).refreshBody();
-        platforms.create(655, 580, 'ground').setScale(2).refreshBody();
-        platforms.create(780, 580, 'ground').setScale(2).refreshBody();
-
-        platforms.create(400, 470, 'ground').setScale(2).refreshBody();
-
-        this.physics.add.collider(this.player, platforms);
+        let platformsGroup = this.physics.add.staticGroup();
+        this.platforms.forEach(p => platformsGroup.create(p.x, p.y, p.type).setScale(p.scale).refreshBody())
+        this.physics.add.collider(this.player, platformsGroup);
     }
 
     private createBackround() {
