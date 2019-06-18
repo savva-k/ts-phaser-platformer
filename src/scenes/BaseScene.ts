@@ -13,4 +13,19 @@ export class BaseScene extends Phaser.Scene {
     protected setView(): void {
         this.cameras.main.centerOn(0, 0);
     }
+
+    protected createAnim(
+        key: string,
+        frames: Phaser.Types.Animations.AnimationFrame[],
+        frameRate: number = 60,
+        repeat: number = -1
+    ) {
+        this.anims.create({
+            key: key,
+            frames: frames,
+            frameRate: frameRate,
+            repeat: repeat
+        });
+    }
+
 }

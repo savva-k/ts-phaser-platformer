@@ -74,24 +74,13 @@ export class Sandbox extends BaseScene {
     }
 
     private createPlayerAnimations() {
-        this.anims.create({
-            key: 'walk-right',
-            frames: this.anims.generateFrameNumbers(this.playerSpriteName, { start: 0, end: 7 }),
-            frameRate: 60,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: 'walk-left',
-            frames: this.anims.generateFrameNumbers(this.playerSpriteName, { start: 8, end: 15 }),
-            frameRate: 60,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: 'idle',
-            frames: [ { key: this.playerSpriteName, frame: 4 } ]
-        });
+        let walkRighFrames = this.anims.generateFrameNumbers(this.playerSpriteName, { start: 0, end: 7 });
+        let walkLeftFrames = this.anims.generateFrameNumbers(this.playerSpriteName, { start: 8, end: 15 });
+        let idleFrames = [ { key: this.playerSpriteName, frame: 4 } ];
+        
+        this.createAnim('walk-right', walkRighFrames);
+        this.createAnim('walk-left', walkLeftFrames);
+        this.createAnim('idle', idleFrames, 0, 0);
     }
 
 }
